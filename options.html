@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Highlight Brain Settings</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="settings">
+      <header class="page-header">
+        <div class="brand-mark" aria-hidden="true">HB</div>
+        <div>
+          <p class="eyebrow">HIGHLIGHT BRAIN</p>
+          <h1>Settings</h1>
+          <p class="intro">Set up how Highlight Brain responds to the text you select.</p>
+        </div>
+      </header>
+
+      <form id="settings-form">
+        <section class="card" aria-labelledby="provider-heading">
+          <h2 id="provider-heading">Gemini API</h2>
+          <p class="section-description">Your key is stored locally in Chrome and is only used to call Google's Gemini API.</p>
+
+          <label for="api-key">Gemini API key</label>
+          <div class="password-field">
+            <input id="api-key" name="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Enter your API key">
+            <button id="toggle-key" class="secondary-button reveal-button" type="button" aria-pressed="false">Show</button>
+          </div>
+
+          <label for="model">Model name</label>
+          <input id="model" name="model" type="text" value="gemini-3.5-flash-lite" spellcheck="false">
+          <p class="hint">You can change this to another model available to your API key.</p>
+
+          <label for="domain-hint">Optional: force a field (leave blank to auto-detect)</label>
+          <input id="domain-hint" name="domainHint" type="text" value="" spellcheck="false" placeholder="Leave blank to infer from the page">
+        </section>
+
+        <section class="card" aria-labelledby="preferences-heading">
+          <h2 id="preferences-heading">Response preferences</h2>
+
+          <label for="target-language">Translation language</label>
+          <input id="target-language" name="targetLanguage" type="text" value="Tamil">
+
+          <label for="explain-style">Explanation style</label>
+          <select id="explain-style" name="explainStyle">
+            <option value="Simple">Simple</option>
+            <option value="Expert-level">Expert-level</option>
+            <option value="ELI5">ELI5</option>
+          </select>
+
+          <div class="checkbox-setting">
+            <label for="show-code-breakdown">
+              <input id="show-code-breakdown" name="showCodeBreakdown" type="checkbox" checked>
+              Show Code breakdown button
+            </label>
+          </div>
+        </section>
+
+        <footer class="form-footer">
+          <span id="save-status" class="status" role="status" aria-live="polite"></span>
+          <button id="test-connection" class="secondary-button" type="button">Test connection</button>
+          <button class="primary-button" type="submit">Save settings</button>
+        </footer>
+      </form>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>
