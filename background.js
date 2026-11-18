@@ -19,7 +19,7 @@ function buildRouterPrompt(message, settings) {
     "- Common word or phrase/idiom: simple meaning, part of speech, one short example sentence, and the meaning in TARGET_LANGUAGE.",
     "- Technical or specialist term: a one-line definition, a 2-3 sentence plain explanation, a simple analogy or example, and 'Related:' with 2-3 closely related terms.",
     "- Name or proper noun: who or what it is in 1-2 sentences, and why it matters in this context.",
-    "- Formula/unit: what it represents, what each symbol means, and when it is used.",
+    "- Formula/unit: write the formula on its own line using single-dollar math delimiters (for example, `$E = mc^2$`), then explain what it represents, what each symbol means, and when it is used.",
     "- Code/command/query/config snippet: explain what it does step by step, plus any bug or improvement.",
     "- Sentence/paragraph: a plain-language rewording first, then brief notes on any key terms.",
     "Disambiguation rules: choose the meaning that best fits the inferred field. If the term has other common meanings, add one short line 'Also means: ...' with the most likely alternative. If the context is too thin to be confident, give the most common meaning and list the top 2-3 possibilities, saying plainly that it is ambiguous. Never invent facts or expansions; if you do not know, say so.",
