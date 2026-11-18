@@ -311,6 +311,14 @@
       font: 12px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
     }
 
+    .response-content.markdown .formula {
+      padding: 0 2px;
+      font-family: "Times New Roman", "Cambria Math", serif;
+      font-size: 1.08em;
+      font-style: italic;
+      white-space: nowrap;
+    }
+
     .response-content.markdown pre code {
       padding: 0;
       background: transparent;
@@ -714,16 +722,42 @@
   }
 
   function appendInlineMarkdown(parent, text) {
-    const tokenPattern = /\*\*([^*]+)\*\*|`([^`]+)`/g;
+    const tokenPattern = /\*\*([^*]+)\*\*|`([^`]+)`|\$([^$]+)\$/g;
     let cursor = 0;
     let match;
     while ((match = tokenPattern.exec(text)) !== null) {
       if (match.index > cursor) {
         parent.appendChild(document.createTextNode(text.slice(cursor, match.index)));
       }
+      if (match[3]) {
+        const element = document.createElement("span");
+        element.className = "formula";
+        appendFormulaText(element, match[3]);
+        parent.appendChild(element);
+        cursor = tokenPattern.lastIndex;
+        continue;
+      }
       const element = document.createElement(match[1] ? "strong" : "code");
       element.textContent = match[1] || match[2];
       parent.appendChild(element);
+      cursor = tokenPattern.lastIndex;
+    }
+    if (cursor < text.length) {
+      parent.appendChild(document.createTextNode(text.slice(cursor)));
+    }
+  }
+
+  function appendFormulaText(parent, text) {
+    const tokenPattern = /\^\{([^{}]+)\}|\^([0-9A-Za-z+\-=]+)/g;
+    let cursor = 0;
+    let match;
+    while ((match = tokenPattern.exec(text)) !== null) {
+      if (match.index > cursor) {
+        parent.appendChild(document.createTextNode(text.slice(cursor, match.index)));
+      }
+      const superscript = document.createElement("sup");
+      superscript.textContent = match[1] || match[2];
+      parent.appendChild(superscript);
       cursor = tokenPattern.lastIndex;
     }
     if (cursor < text.length) {
